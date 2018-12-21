@@ -1,0 +1,12 @@
+[submodule "css"]
+	path = css
+	url = git@github.com:CeusMedia/AssetLibrary-CSS.git
+[submodule "js"]
+	path = js
+	url = git@github.com:CeusMedia/AssetLibrary-JS.git
+[submodule "icons"]
+	path = icons
+	url = git@github.com:CeusMedia/AssetLibrary-Icons.git
+[submodule "fonts"]
+	path = fonts
+	url = git@github.com:CeusMedia/AssetLibrary-Fonts.git
