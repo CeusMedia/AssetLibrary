@@ -24,12 +24,40 @@ Build a central asset library for several web applications.
 Using the template, you can create a common asset library to be used be several web apps.
 By default, it holds some very basic ressources, like:
 
-- JS:
-  - jQuery
 - CSS:
-  - Bootstrap
   - blueprint
+  - Bootstrap
+- JS, like:
+  - jQuery
+  - some jQuery plugins
+  - CodeMirror
+  - modernizr
+  - mootools
+  - prototype
+  - TinyMCE
 - Fonts:
   - Fira
+  - FontAwesome
+  - Hack
+  - OpenSans
+  - Roboto
+  - Ubuntu
+  - WorkSans
 - Icon sets:
   - Glyphicons
+  - famfamfam silk
+  - famfamfam mini
+  - famfamfam flags
+  - tango
+
+### Installation
+````
+git clone --recursive git@github.com:CeusMedia/AssetLibrary.git assets
+````
+
+### Update
+````
+cd assets
+git submodule update --recursive --remote
+````
+
