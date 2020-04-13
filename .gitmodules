@@ -1,12 +1,16 @@
 [submodule "css"]
 	path = css
 	url = git@github.com:CeusMedia/AssetLibrary-CSS.git
+	branch = origin/master
 [submodule "js"]
 	path = js
 	url = git@github.com:CeusMedia/AssetLibrary-JS.git
+	branch = origin/master
 [submodule "icons"]
 	path = icons
 	url = git@github.com:CeusMedia/AssetLibrary-Icons.git
+	branch = origin/master
 [submodule "fonts"]
 	path = fonts
 	url = git@github.com:CeusMedia/AssetLibrary-Fonts.git
+	branch = origin/master
