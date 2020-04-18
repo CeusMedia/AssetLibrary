@@ -1,9 +1,21 @@
 <?php
 //phpinfo();die;
 
-$path	= str_replace( '../', '', $_SERVER['SCRIPT_URL'] );
+
+if( isset( $_SERVER['SCRIPT_URL'] ) ){
+	$path		= $_SERVER['SCRIPT_URL'];
+	$basePath	= '';
+}
+else{
+	$docRoot	= $_SERVER['DOCUMENT_ROOT'];
+	$basePath	= dirname( dirname( $_SERVER['SCRIPT_FILENAME'] ) );
+	$basePath	= preg_replace( '@^'.preg_quote( $docRoot, '@' ).'@', '', $basePath );
+	$path		= $_SERVER['REQUEST_URI'];
+	$path		= preg_replace( '@^'.preg_quote( $basePath, '@' ).'@', '', $path );
+}
+$path	= str_replace( '../', '', $path );
 $path	= trim( $path, '/' );
-//$path	= preg_replace( '@^\/@', '', $path );
+$basePath	.= '/';
 
 
 $list	= array( 'folders' => array(), 'files' => array() );
@@ -26,21 +38,21 @@ $navItems	= array();
 natcasesort( $list['folders'] );
 natcasesort( $list['files'] );
 foreach( $list['folders'] as $item ){
-	$link		= '<a class="nav-link not-btn not-btn-link" href="'.$item.'">'.$iconFolder.'&nbsp;'.$item.'</a>';
+	$link		= '<a class="nav-link not-btn not-btn-link" href="'.$basePath.$item.'">'.$iconFolder.'&nbsp;'.$item.'</a>';
 	$navItems[]	= '<li class="not-list-group nav-item" data-type="folder">'.$link.'</li>';
 }
 foreach( $list['files'] as $item ){
-	$link		= '<a class="nav-link not-btn not-btn-link" href="'.$item.'">'.$iconFile.'&nbsp;'.$item.'</a>';
+	$link		= '<a class="nav-link not-btn not-btn-link" href="'.$basePath.$item.'">'.$iconFile.'&nbsp;'.$item.'</a>';
 	$navItems[]	= '<li class="not-list-group-item nav-item" data-type="file">'.$link.'</li>';
 }
 $navList	= '<ul class="not-list-group nav flex-column">'.join( $navItems ).'</ul>';
 
-function renderPosition( $path ){
+function renderPosition( $basePath, $path ){
 	$position	= array();// '<li class="breadcrumb-item"><strong>Position: </strong></li>' );
 	if( strlen( $path ) ){
 		$pathParts	= explode( '/', $path );
-		$way		= '/';
-		$position[]	= '<li class="breadcrumb-item"><a href="/">Home</a></li>';
+		$way		= $basePath;
+		$position[]	= '<li class="breadcrumb-item"><a href="'.$basePath.'">Home</a></li>';
 		foreach( $pathParts as $nr => $part ){
 			$way	.= $part.'/';
 			if( $nr + 1 == count( $pathParts ) )
@@ -54,7 +66,7 @@ function renderPosition( $path ){
 	$position	= '<ul class="breadcrumb">'.join( $position ).'</ul>';
 	return $position;
 }
-$position	= renderPosition( $path );
+$position	= renderPosition( $basePath, $path );
 
 $info		= '';
 $infoFile	= 'README.md';
