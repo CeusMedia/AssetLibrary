@@ -1,1 +1,6 @@
-Options +FollowSymLinks +Indexes
+Options +FollowSymLinks -Indexes
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)/?$ .index/index.php
+
